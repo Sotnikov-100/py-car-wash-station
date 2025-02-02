@@ -1,8 +1,13 @@
-from typing import List
+ffrom typing import List
 
 
 class Car:
-    def __init__(self, comfort_class: int, clean_mark: int, brand: str) -> None:
+    def __init__(
+        self,
+        comfort_class: int,
+        clean_mark: int,
+        brand: str
+    ) -> None:
         self.comfort_class = comfort_class
         self.clean_mark = clean_mark
         self.brand = brand
@@ -23,9 +28,9 @@ class CarWashStation:
 
     def calculate_washing_price(self, car: Car) -> float:
         price = (
-            car.comfort_class *
-            (self.clean_power - car.clean_mark) *
-            self.average_rating
+            car.comfort_class
+            * (self.clean_power - car.clean_mark)
+            * self.average_rating
         ) / self.distance_from_city_center
         return round(price, 1)
 
@@ -37,11 +42,18 @@ class CarWashStation:
         return 0.0
 
     def serve_cars(self, cars: List[Car]) -> float:
-        total_income = sum(self.wash_single_car(car) for car in cars)
+        total_income = sum(
+            self.wash_single_car(car)
+            for car in cars
+        )
         return round(total_income, 1)
 
     def rate_service(self, new_rating: int) -> None:
-        total_rating = self.average_rating * self.count_of_ratings + new_rating
+        total_rating = (
+            self.average_rating * self.count_of_ratings
+            + new_rating
+        )
         self.count_of_ratings += 1
-        self.average_rating = round(total_rating / self.count_of_ratings, 1)
-
+        self.average_rating = round(
+            total_rating / self.count_of_ratings, 1
+        )
